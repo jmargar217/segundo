@@ -10,7 +10,7 @@ import model.JefeGrupo;
 public class Main {
 	static Scanner teclado = new Scanner(System.in);
 	
-	private final static String MENU = "1. Añadir Jefe de Grupo: \n"+"2. Añadir Desarrollador: \n"+"3. Lista de empleados: \n"+"4. Salir";
+	private final static String MENU = "1. Añadir Jefe de Grupo: \n"+"2. Añadir Desarrollador: \n"+"3. Lista de empleados: \n"+"4. Ordenar por sueldo"+"5. Salir";
 	
 	public static void main(String[] args) {
 		
@@ -25,7 +25,7 @@ public class Main {
 		double sueldo = 0;
 		
 		int opcion = 0;
-		while(opcion !=4) {
+		while(opcion !=5) {
 			System.out.println(MENU);
 			System.out.println("Indique una opción del menu: ");
 			opcion = Integer.parseInt(teclado.nextLine());
@@ -57,13 +57,16 @@ public class Main {
 				System.out.println("Indique sueldo: ");
 				sueldo = Integer.parseInt(teclado.nextLine());
 				try {
-					Desarrollador desarrollador = new Desarrollador(nombre, dni, localidad, sueldo);
+					empresa.addEmpleado(new Desarrollador(nombre, dni, localidad, sueldo));
 				} catch (SueldoException e) {
 					System.out.println(e.getMessage());
 				}
 				break;
 			case 3:
 				System.out.println(empresa.toString());
+				break;
+			case 4:
+				System.out.println(empresa.ordenarEmpleadoSueldo());
 				break;
 			}
 		}
