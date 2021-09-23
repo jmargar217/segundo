@@ -10,7 +10,7 @@ import model.JefeGrupo;
 public class Main {
 	static Scanner teclado = new Scanner(System.in);
 	
-	private final static String MENU = "1. Añadir Jefe de Grupo: \n"+"2. Añadir Desarrollador: \n"+"3. Lista de empleados: \n"+"4. Ordenar por sueldo"+"5. Salir";
+	private final static String MENU = "1. Añadir Jefe de Grupo: \n"+"2. Añadir Desarrollador: \n"+"3. Lista de empleados: \n"+"4. Ordenar por sueldo\n"+"5. Salir";
 	
 	public static void main(String[] args) {
 		
@@ -56,11 +56,13 @@ public class Main {
 				localidad = teclado.nextLine();
 				System.out.println("Indique sueldo: ");
 				sueldo = Integer.parseInt(teclado.nextLine());
+				
 				try {
 					empresa.addEmpleado(new Desarrollador(nombre, dni, localidad, sueldo));
 				} catch (SueldoException e) {
-					System.out.println(e.getMessage());
+					
 				}
+				
 				break;
 			case 3:
 				System.out.println(empresa.toString());

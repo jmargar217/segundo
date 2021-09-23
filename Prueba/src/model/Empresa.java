@@ -22,6 +22,7 @@ public class Empresa {
 		}
 	}
 	
+	// Ordena la lista de empleados por sueldo de manera decreciente
 	public String ordenarEmpleadoSueldo() {
 		StringBuilder sb = new StringBuilder();
 		

@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Objects;
-
 import excepcionCustom.SueldoException;
 
 public abstract class AbstractEmpleado implements IActualizarSueldo {
@@ -35,17 +33,17 @@ public abstract class AbstractEmpleado implements IActualizarSueldo {
 	public String getLocalidad() {
 		return localidad;
 	}
-	
-	
 
 	public double getSueldo() {
 		return sueldo;
 	}
 
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(dni);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
+		return result;
 	}
 
 	@Override
@@ -57,7 +55,12 @@ public abstract class AbstractEmpleado implements IActualizarSueldo {
 		if (getClass() != obj.getClass())
 			return false;
 		AbstractEmpleado other = (AbstractEmpleado) obj;
-		return Objects.equals(dni, other.dni);
+		if (dni == null) {
+			if (other.dni != null)
+				return false;
+		} else if (!dni.equals(other.dni))
+			return false;
+		return true;
 	}
 
 	@Override
