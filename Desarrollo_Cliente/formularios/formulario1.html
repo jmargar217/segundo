@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
-        .invisible{
+        .invisible {
             display: none;
         }
-
-        .visible{
-            display:inline;
+        
+        .visible {
+            display: inline;
         }
     </style>
 
 </head>
+
 <body>
     <form action="" method="POST">
         <label for="nombre">Nombre</label>
         <input type="text" name="nombre" id="nombre"><br><br>
         <label for="apellidos">Apellidos</label>
         <input type="text" name="apellidos" id="apellido"><br><br>
-        <label for="nacimiento">Fecha de nacimiento</label>
-        <input type="text" name="nacimiento" id="fecha"><br><br>
+        <label for="dni">DNI</label>
+        <input type="text" name="dni" id="dni"><br><br>
 
-        <label for="coche"></label>¿Tienes coche?
-        &nbsp;&nbsp;Si<input type="radio" id="cocheSi" name="coches">&nbsp;&nbsp;No<input type="radio" id="cocheNo" name="coches"><br><br>
+        <label for="coche"></label>¿Tienes coche? &nbsp;&nbsp;Si
+        <input type="radio" id="cocheSi" name="coches">&nbsp;&nbsp;No<input type="radio" id="cocheNo" name="coches"><br><br>
         <label for="coches"></label>
         <input type="text" placeholder="indica el numero de coches" class="invisible">
 
-        <label for="hijos"></label>¿Tienes hijos?
-        &nbsp;&nbsp;Si<input type="radio" id="cocheSi" name="hijos">&nbsp;&nbsp;No<input type="radio" id="hijoNo" name="hijos"><br><br>
-        <label for="hijos"></label>     
+        <label for="hijos"></label>¿Tienes hijos? &nbsp;&nbsp;Si
+        <input type="radio" id="cocheSi" name="hijos">&nbsp;&nbsp;No<input type="radio" id="hijoNo" name="hijos"><br><br>
+        <label for="hijos"></label>
         <input type="text" placeholder="Indica el numero de hijos" class="invisible"><br><br>
-        <input type="button" id="enviar">
+        <input type="submit" id="enviar" value="Enviar">
 
     </form>
-    
+
 </body>
 <script src="formulario1.js"></script>
+
 </html>
