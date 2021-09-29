@@ -1,0 +1,177 @@
+CREATE TABLE PERSONA(
+dni VARCHAR2(9) PRIMARY KEY,
+telefono VARCHAR2(9),
+poblacion VARCHAR2(30),
+nombre VARCHAR2(15)
+);
+
+CREATE TABLE VEHICULO(
+matricula VARCHAR2(15) PRIMARY KEY,
+marca VARCHAR2(15),
+modelo VARCHAR2(15),
+dni NOT NULL REFERENCES PERSONA ON DELETE CASCADE
+);
+
+CREATE TABLE INFRACCION(
+referencia NUMBER(3) PRIMARY KEY,
+fecha DATE,
+importe NUMBER(4),
+dni NOT NULL REFERENCES PERSONA ON DELETE CASCADE,
+matricula NOT NULL REFERENCES VEHICULO ON DELETE CASCADE
+);
+
+CREATE TABLE PERSONA_VEHICULO(
+dni VARCHAR2(9) NOT NULL REFERENCES PERSONA ON DELETE CASCADE,
+matricula VARCHAR2(15) NOT NULL REFERENCES VEHICULO ON DELETE CASCADE,
+PRIMARY KEY(dni,matricula)
+);
+
+CREATE TABLE PERSONA_INFRACCION(
+dni VARCHAR2(9) NOT NULL REFERENCES PERSONA ON DELETE CASCADE,
+referencia NUMBER(3) NOT NULL REFERENCES INFRACCION ON DELETE CASCADE,
+PRIMARY KEY(dni,referencia)
+);
+
+INSERT INTO PERSONA VALUES
+('20064217Y','645810775','Mairena del Alcor','Joaquin');
+INSERT INTO PERSONA VALUES
+('28576514A','690810775','Viso del Alcor','Jesus');
+INSERT INTO PERSONA VALUES
+('48458789B','611110775','Carmona','Mario');
+INSERT INTO PERSONA VALUES
+('15410187Z','745810333','Brenes','Julian Pepe');
+
+
+INSERT INTO VEHICULO VALUES
+('0535UEU','Opel','Corsa','20064217Y');
+INSERT INTO VEHICULO VALUES
+('0270DQJ','Renault','Laguna','20064217Y');
+INSERT INTO VEHICULO VALUES
+('4341EWC','Fiat','Punto','28576514A');
+INSERT INTO VEHICULO VALUES
+('5086NZJ','Seat','Leon','48458789B');
+INSERT INTO VEHICULO VALUES
+('0383TTA','Ferrari','812','15410187Z');
+
+
+INSERT INTO INFRACCION VALUES
+(1,'03/07/2021',500,'28576514A','4341EWC');
+INSERT INTO INFRACCION VALUES
+(2,'22/09/2021',300,'28576514A','4341EWC');
+INSERT INTO INFRACCION VALUES
+(3,'05/10/2021',1000,'15410187Z','0383TTA');
+INSERT INTO INFRACCION VALUES
+(4,'25/03/2021',100,'48458789B','5086NZJ');
+
+INSERT INTO PERSONA_VEHICULO VALUES
+('20064217Y','0535UEU');
+INSERT INTO PERSONA_VEHICULO VALUES
+('20064217Y','0270DQJ');
+INSERT INTO PERSONA_VEHICULO VALUES
+('28576514A','4341EWC');
+INSERT INTO PERSONA_VEHICULO VALUES
+('48458789B','5086NZJ');
+INSERT INTO PERSONA_VEHICULO VALUES
+('15410187Z','0383TTA');
+
+
+INSERT INTO PERSONA_INFRACCION VALUES
+('20064217Y',1);
+INSERT INTO PERSONA_INFRACCION VALUES
+('20064217Y',2);
+INSERT INTO PERSONA_INFRACCION VALUES
+('15410187Z',3);
+INSERT INTO PERSONA_INFRACCION VALUES
+('48458789B',4);
+
+
+/*
+Cambio el nombre a las personas con un dni especifico
+
+Cambio todos los valores del campo nombre a mayúsculas
+*/
+
+UPDATE PERSONA
+SET NOMBRE = 'Juan'
+WHERE DNI = '20064217Y';
+
+
+UPDATE PERSONA
+SET NOMBRE = UPPER(NOMBRE);
+
+UPDATE VEHICULO
+SET MODELO ='Fiesta'
+WHERE MARCA LIKE '%t'; 
+
+/*
+Elimino los coches de la marca Opel
+
+Las personas cuyo dni empiezen por 2
+
+Las infracciones que sean inferiores o iguales a 100 €
+
+Sino hubiera puesto el on delete cascade no me dejaria borrarlo ya que los datos de los vehiculos,personas,
+infraccion se encuentran referenciados en las otras tablas(FK)
+*/
+
+DELETE FROM VEHICULO
+WHERE MARCA = 'Opel';
+
+DELETE FROM PERSONA
+WHERE DNI LIKE '2%';
+
+DELETE FROM INFRACCION
+WHERE IMPORTE BETWEEN 500 AND 1000;
+
+
+/*
+Consultas
+	- Devuelve la referencia de la infracción y la matricula que tiene asociada(Join de las 3 tablas)
+
+	- Devuelve el nombre y el numero de coches que tiene cada persona.
+	
+	- Igual pero solo de las personas que tenga 2 o más coches.
+	
+	- Devuelve la media del importe de las infracciones.
+	
+	- Devuelve la el importe de la mayor infracción.
+	
+	- Devuelve las infracciones que hubo en Septiembre.
+	
+	- Primero saco los dni de las personas que tienen mas de un coche y luego por último saco
+	  los nombres de las personas cuyo dni no aparecen en esa subconsulta.
+	
+*/
+SELECT v.MATRICULA , i.REFERENCIA FROM PERSONA p , VEHICULO v , INFRACCION i 
+WHERE p.DNI =v.DNI AND v.MATRICULA = i.MATRICULA AND p.DNI = i.DNI;
+
+SELECT p.NOMBRE, COUNT(*) AS NUM_COCHES FROM PERSONA p ,VEHICULO v
+WHERE p.DNI = v.DNI
+GROUP BY p.NOMBRE ;
+
+
+SELECT p.NOMBRE FROM PERSONA p ,VEHICULO v
+WHERE p.DNI = v.DNI
+GROUP BY p.NOMBRE
+HAVING COUNT(*)>=2;
+
+
+SELECT AVG(i.IMPORTE) AS MEDIA FROM INFRACCION i; 
+SELECT MAX(i.IMPORTE) FROM INFRACCION i; 
+
+SELECT * FROM INFRACCION i
+WHERE EXTRACT(MONTH FROM i.FECHA)='09';
+
+
+SELECT p2.NOMBRE FROM PERSONA p2
+WHERE p2.DNI NOT IN 
+	(SELECT p.DNI FROM PERSONA p, VEHICULO v
+	WHERE p.DNI =v.DNI
+	GROUP BY p.DNI
+	HAVING COUNT(*)>1);
+
+
+
+
+
+
