@@ -10,14 +10,15 @@ const dni = document.getElementById("dni");
 const coches = document.getElementById("coches");
 const hijos = document.getElementById("hijos");
 
-const regExTexto = /^([A-Z][a-z]+)/mg;
-const regExDni = /^([1-9][0-9]{7}[A-Z]+)/mg;
-const regExNumeros = /^([1-9]*)/mg;
+const regExNombre = /^([A-Z][a-z]+$)/;
+const regExApellidos = /^[A-Z][a-z]+\s[A-Z][a-z]+$/;
+const regExDni = /^([1-9][0-9]{7}[A-Z]+$)/;
+const regExNumeros = /^([1-9]*)/;
 
 const formuValido = {
     nombre: false,
-    //apellidos: false,
-    //dni: false,
+    apellidos: false,
+    dni: false,
     //coches: false,
     //hijos: false
 }
@@ -29,15 +30,26 @@ formulario.addEventListener('submit', (e) => {
 
 
 nombre.addEventListener('change', (e) => {
-    e.preventDefault();
 
-    if (e.target.value.trim().length > 0 && regExTexto.test(e.target.value)) {
+    if (e.target.value.trim().length > 0 && regExNombre.test(e.target.value)) {
         formuValido.nombre = true;
-    } else {
-        alert("Nombre incorrecto");
+    }
+})
+
+apellidos.addEventListener('change', (e) => {
+    if (e.target.value.trim().length > 0 && regExApellidos.test(e.target.value)) {
+        formuValido.apellidos = true;
+    }
+})
+
+dni, addEventListener('change', (e) => {
+    if (regExDni.test(e.target.value)) {
+        formuValido.dni = true;
     }
 
 })
+
+
 
 
 function validarFormulario() {
