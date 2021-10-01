@@ -2,13 +2,12 @@
 Formulario con expresiones regulares y condicionales que hagan aparecer preguntas en función de la respuesta
 */
 
-
 const formulario = document.querySelector("form");
 const nombre = document.getElementById("nombre");
 const apellidos = document.getElementById("apellido");
 const dni = document.getElementById("dni");
-const coches = document.getElementById("coches");
-const hijos = document.getElementById("hijos");
+const coches = document.querySelector("input[name='coches']:checked").value;
+const hijos = document.querySelector("input[name='hijos']:checked").value;
 
 const regExNombre = /^([A-Z][a-z]+$)/;
 const regExApellidos = /^[A-Z][a-z]+\s[A-Z][a-z]+$/;
@@ -19,7 +18,7 @@ const formuValido = {
     nombre: false,
     apellidos: false,
     dni: false,
-    //coches: false,
+    coches: false,
     //hijos: false
 }
 
@@ -33,18 +32,38 @@ nombre.addEventListener('change', (e) => {
 
     if (e.target.value.trim().length > 0 && regExNombre.test(e.target.value)) {
         formuValido.nombre = true;
+    }else{
+        alert("El nombre es incorrecto");
     }
 })
 
 apellidos.addEventListener('change', (e) => {
     if (e.target.value.trim().length > 0 && regExApellidos.test(e.target.value)) {
         formuValido.apellidos = true;
+    }else{
+        alert("El apellido es incorrecto");
     }
 })
 
-dni, addEventListener('change', (e) => {
+dni.addEventListener('change', (e) => {
     if (regExDni.test(e.target.value)) {
         formuValido.dni = true;
+    }else{
+        alert("El dni es incorrecto");
+    }
+
+})
+
+coches[0].addEventListener('change',(e) => {
+    if(coches[0].checked){
+        document.getElementById("numC").classList.remove("oculto");
+    }
+
+})
+
+coches[1].addEventListener('change',(e) => {
+    if(coches[1].checked){
+        document.getElementById("numC").classList.add("oculto");
     }
 
 })
