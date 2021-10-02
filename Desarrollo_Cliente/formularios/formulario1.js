@@ -1,25 +1,24 @@
-/*
-Formulario con expresiones regulares y condicionales que hagan aparecer preguntas en función de la respuesta
-*/
-
 const formulario = document.querySelector("form");
 const nombre = document.getElementById("nombre");
 const apellidos = document.getElementById("apellido");
 const dni = document.getElementById("dni");
-const coches = document.querySelector("input[name='coches']:checked").value;
-const hijos = document.querySelector("input[name='hijos']:checked").value;
+
+const coches = document.querySelectorAll("input[name='coches']");
+const numC = document.getElementById("numC");
+
+const hijos = document.querySelectorAll("input[name='hijos']");
+
 
 const regExNombre = /^([A-Z][a-z]+$)/;
 const regExApellidos = /^[A-Z][a-z]+\s[A-Z][a-z]+$/;
 const regExDni = /^([1-9][0-9]{7}[A-Z]+$)/;
-const regExNumeros = /^([1-9]*)/;
 
 const formuValido = {
     nombre: false,
     apellidos: false,
     dni: false,
     coches: false,
-    //hijos: false
+    hijos: false
 }
 
 formulario.addEventListener('submit', (e) => {
@@ -32,7 +31,7 @@ nombre.addEventListener('change', (e) => {
 
     if (e.target.value.trim().length > 0 && regExNombre.test(e.target.value)) {
         formuValido.nombre = true;
-    }else{
+    } else {
         alert("El nombre es incorrecto");
     }
 })
@@ -40,7 +39,7 @@ nombre.addEventListener('change', (e) => {
 apellidos.addEventListener('change', (e) => {
     if (e.target.value.trim().length > 0 && regExApellidos.test(e.target.value)) {
         formuValido.apellidos = true;
-    }else{
+    } else {
         alert("El apellido es incorrecto");
     }
 })
@@ -48,22 +47,57 @@ apellidos.addEventListener('change', (e) => {
 dni.addEventListener('change', (e) => {
     if (regExDni.test(e.target.value)) {
         formuValido.dni = true;
-    }else{
+    } else {
         alert("El dni es incorrecto");
     }
 
 })
 
-coches[0].addEventListener('change',(e) => {
-    if(coches[0].checked){
+coches[0].addEventListener('change', (e) => {
+    if (e.target.checked) {
         document.getElementById("numC").classList.remove("oculto");
     }
 
 })
 
-coches[1].addEventListener('change',(e) => {
-    if(coches[1].checked){
+
+numC.addEventListener('change', (e) => {
+    if (e.target.value.trim().length > 0 && (/^[1-9]$/).test(e.target.value)) {
+        formuValido.coches = true;
+    } else {
+        alert("Debe indicar un numero del 1 al 10");
+    }
+
+
+})
+
+coches[1].addEventListener('change', (e) => {
+    if (e.target.checked) {
         document.getElementById("numC").classList.add("oculto");
+        formuValido.coches = true;
+    }
+})
+
+hijos[0].addEventListener('change', (e) => {
+    if (e.target.checked) {
+        document.getElementById("numH").classList.remove("oculto");
+        formuValido.hijos = true;
+    }
+
+})
+
+numH.addEventListener("change", (e) => {
+    if (e.target.value.trim().length > 0 && (/^[1-9]$/).test(e.target.value)) {
+        formuValido.coches = true;
+    } else {
+        alert("Debe indicar un numero del 1 al 10");
+    }
+})
+
+hijos[1].addEventListener('change', (e) => {
+    if (e.target.checked) {
+        document.getElementById("numH").classList.add("oculto");
+        formuValido.hijos = true;
     }
 
 })

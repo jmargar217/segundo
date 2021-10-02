@@ -18,8 +18,8 @@
 </head>
 
 <body>
-    <form action="" method="POST">
-        <label for="nombre">Name</label>
+    <form action="http://www.iesjacaranda.es/lmsgi/resultado.php" method="GET">
+        <label for="nombre">Nombre</label>
         <input type="text" name="nombre" id="nombre"><br><br>
         <label for="apellidos">Apellidos</label>
         <input type="text" name="apellidos" id="apellido"><br><br>
@@ -30,15 +30,16 @@
         <input type="radio" value="si" name="coches">&nbsp;&nbsp;No
         <input type="radio" value="no" name="coches"><br><br>
 
+
         <label for="numC"></label>
-        <input type="text" placeholder="indica el numero de coches" class="oculto" id="numC"><br><br>
+        <input type="text" placeholder="indica el numero de coches" class="oculto" id="numC" name="numero_coches"><br><br>
 
         <label for="hijos"></label>¿Tienes hijos? &nbsp;&nbsp;Si
-        <input type="radio" name="hijos">&nbsp;&nbsp;No
-       <input type="radio" name="hijos"><br><br>
+        <input type="radio" name="hijos" value="si">&nbsp;&nbsp;No
+        <input type="radio" name="hijos" value="no"><br><br>
 
         <label for="numH"></label>
-        <input type="text" placeholder="Indica el numero de hijos" class="oculto" id="numH"><br><br>
+        <input type="text" placeholder="Indica el numero de hijos" class="oculto" id="numH" name="numero_hijos"><br><br>
         <input type="submit" id="enviar" value="Enviar">
 
     </form>
