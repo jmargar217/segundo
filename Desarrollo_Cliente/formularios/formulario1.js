@@ -5,7 +5,6 @@ const dni = document.getElementById("dni");
 
 const coches = document.querySelectorAll("input[name='coches']");
 const numC = document.getElementById("numC");
-
 const hijos = document.querySelectorAll("input[name='hijos']");
 
 
@@ -53,14 +52,6 @@ dni.addEventListener('change', (e) => {
 
 })
 
-coches[0].addEventListener('change', (e) => {
-    if (e.target.checked) {
-        document.getElementById("numC").classList.remove("oculto");
-    }
-
-})
-
-
 numC.addEventListener('change', (e) => {
     if (e.target.value.trim().length > 0 && (/^[1-9]$/).test(e.target.value)) {
         formuValido.coches = true;
@@ -71,6 +62,14 @@ numC.addEventListener('change', (e) => {
 
 })
 
+coches[0].addEventListener('change', (e) => {
+    if (e.target.checked) {
+        document.getElementById("numC").classList.remove("oculto");
+    }
+
+})
+
+
 coches[1].addEventListener('change', (e) => {
     if (e.target.checked) {
         document.getElementById("numC").classList.add("oculto");
@@ -78,21 +77,22 @@ coches[1].addEventListener('change', (e) => {
     }
 })
 
-hijos[0].addEventListener('change', (e) => {
-    if (e.target.checked) {
-        document.getElementById("numH").classList.remove("oculto");
-        formuValido.hijos = true;
-    }
-
-})
 
 numH.addEventListener("change", (e) => {
     if (e.target.value.trim().length > 0 && (/^[1-9]$/).test(e.target.value)) {
-        formuValido.coches = true;
+        formuValido.hijos = true;
     } else {
         alert("Debe indicar un numero del 1 al 10");
     }
 })
+
+hijos[0].addEventListener('change', (e) => {
+    if (e.target.checked) {
+        document.getElementById("numH").classList.remove("oculto");
+    }
+
+})
+
 
 hijos[1].addEventListener('change', (e) => {
     if (e.target.checked) {
@@ -101,8 +101,6 @@ hijos[1].addEventListener('change', (e) => {
     }
 
 })
-
-
 
 
 function validarFormulario() {
