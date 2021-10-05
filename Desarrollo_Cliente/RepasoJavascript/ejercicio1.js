@@ -9,6 +9,8 @@ let nombre = document.getElementById("equipo").value;
 let aplicar = document.getElementById("boton");
 aplicar.addEventListener('click', ordenar);
 
+const atras = document.getElementById("atras").addEventListener("click",retrasar);
+
 
 function ordenar() {
     
@@ -29,4 +31,8 @@ function ordenar() {
     nuevoNodo.appendChild(col3);
     
     fila.replaceWith(nuevoNodo);
+}
+
+function retrasar(){
+    window.history.back(-1);
 }

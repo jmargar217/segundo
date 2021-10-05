@@ -13,6 +13,7 @@ replace: despues de usarlo la página actual no se guardara en el historial del 
 const informacion = document.location;
 const asignar = document.getElementById("assign").addEventListener("click", asig);
 const reemplazar = document.getElementById("reemplazar").addEventListener("click", reemp);
+const refresca = document.getElementById("ref").addEventListener("click",refrescar);
 
 function asig() {
     informacion.assign("https://marca.com");
@@ -20,4 +21,8 @@ function asig() {
 
 function reemp() {
     informacion.replace("https://marca.com");
+}
+
+function refrescar(){
+    document.location.reload();
 }

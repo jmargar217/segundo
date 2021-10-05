@@ -7,6 +7,9 @@ const coches = document.querySelectorAll("input[name='coches']");
 const numC = document.getElementById("numC");
 const hijos = document.querySelectorAll("input[name='hijos']");
 
+const atras = document.getElementById("atras").addEventListener("click",retrasar);
+
+
 
 const regExNombre = /^([A-Z][a-z]+$)/;
 const regExApellidos = /^[A-Z][a-z]+\s[A-Z][a-z]+$/;
@@ -101,6 +104,10 @@ hijos[1].addEventListener('change', (e) => {
     }
 
 })
+
+function retrasar(){
+    window.history.back(-1);
+}
 
 
 function validarFormulario() {
