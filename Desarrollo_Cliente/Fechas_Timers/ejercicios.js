@@ -75,7 +75,7 @@ setInterval(cronometro, 100);
 pregunta si se quiere posponer o detener, si se pospone "sonará" a los 2 minutos.
 EXTRA: haz que suene un sonido además de mostrar el mensaje.
 */
-
+const audio = new Audio('alarm.mp3');
 
 function sonar() {
     let horaActual = new Date();
@@ -86,15 +86,22 @@ function sonar() {
     let horaDada = new Date(0, 0, 0, aux[0], aux[1], 0, 0);
 
     if (horaActual.getHours() == horaDada.getHours() &&
-        horaActual.getMinutes() == horaDada.getMinutes()) {
+        horaActual.getMinutes() == horaDada.getMinutes() && horaActual.getSeconds() == horaDada.getSeconds()) {
+
+        audio.play();
 
         let respuesta = prompt("¿Quieres posponer(P) o detener(D) la alarma?");
         if (respuesta == "P") {
-            setTimeout(document.getElementById("seis").innerText = "ola", 120000);
+            setTimeout(posponer, 120000);
         } else {
-            document.getElementById("seis").innerText = "Alarma sonandooo!";
+            document.getElementById("siete").innerText = "Alarma detenida!";
         }
     }
+}
+
+function posponer() {
+    document.getElementById("siete").innerText = "Sonando alarma";
+    audio.play();
 }
 
 
