@@ -97,6 +97,4 @@ function sonar() {
     }
 }
 
-
-
 setInterval(sonar, 1000);
