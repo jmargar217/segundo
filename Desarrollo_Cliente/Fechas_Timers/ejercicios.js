@@ -99,14 +99,9 @@ function sonar() {
     }
 }
 
-<<<<<<< HEAD
-=======
 function posponer() {
     document.getElementById("siete").innerText = "Sonando alarma";
     audio.play();
 }
 
-
-
->>>>>>> 6cc7bceba9e727f62eb780ca07dd535c86a0035f
 setInterval(sonar, 1000);
