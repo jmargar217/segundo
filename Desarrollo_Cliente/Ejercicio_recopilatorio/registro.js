@@ -8,7 +8,7 @@ formulario.addEventListener("submit", (e) => {
 const nombre = document.getElementById("nombre");
 const telefono = document.getElementById("telefono");
 const dni = document.getElementById("dni");
-const fecha = document.getElementById("fecha");
+let fecha = document.getElementById("fecha");
 
 const regExNombre = /^([A-Z]{1}[a-zñáéíóú]+[\s]*)+$/;
 const regExTelefono = /^[\d]{3}[-]*([\d]{2}[-]*){2}[\d]{2}$/;
@@ -23,41 +23,40 @@ let formuValido = {
 };
 
 
-nombre.addEventListener('change',(e)=>{
-    if(e.target.value.trim().length >0 &&  regExNombre.test(e.target.value)){
+nombre.addEventListener('change', (e) => {
+    if (e.target.value.trim().length > 0 && regExNombre.test(e.target.value)) {
         formuValido.nombre = true;
-    }else{
+    } else {
         alert("Error en el nombre");
     }
 });
 
 
-telefono.addEventListener('change',(e)=>{
-    if(e.target.value.trim().length >0 &&  regExTelefono.test(e.target.value)){
+telefono.addEventListener('change', (e) => {
+    if (e.target.value.trim().length > 0 && regExTelefono.test(e.target.value)) {
         formuValido.telefono = true;
-    }else{
+    } else {
         alert("Error en el teléfono");
     }
 });
 
-dni.addEventListener('change',(e)=>{
-    if(e.target.value.trim().length >0 &&  regExDni.test(e.target.value)){
+dni.addEventListener('change', (e) => {
+    if (e.target.value.trim().length > 0 && regExDni.test(e.target.value)) {
         formuValido.dni = true;
-    }else{
+    } else {
         alert("Error en el dni");
     }
 });
 
 
-fecha.addEventListener('change',(e)=>{
-    lista = e.target.value.split("-");
-    let year =  parseInt(lista[2]);
-    fechaActual = new Date();
-    let aux = fechaActual.getFullYear();
+fecha.addEventListener('change', (e) => {
+    let aux = fecha.value.split('-');
+    let fechaIntroducida = new Date(aux[0], aux[1], aux[2]);
+    let fechaActual = new Date();
 
-    if(aux - year>18){
-        formuValido.fecha=true;
-    }else{
+    if ((fechaActual.getFullYear() - fechaIntroducida.getFullYear()) > 18) {
+        formuValido.fecha = true;
+    } else {
         alert("Error fecha");
     }
 
@@ -68,16 +67,16 @@ function validarFormulario() {
     const valid = formValues.findIndex(value => value == false);
     if (valid == -1) {
         const datosValidados = {
-            nombreValido: nombre.value,
-            telefonoValido: telefono.value,
-            dniValido: dni.value,
-            fechaValido: fecha.value
+            nombre: nombre.value,
+            telefono: telefono.value,
+            dni: dni.value,
+            fecha: fecha.value
 
-        };  
-        const peticion=new XMLHttpRequest();
+        };
+        const peticion = new XMLHttpRequest();
         peticion.open('POST', 'http://localhost:3000/users');
-        peticion.setRequestHeader('Content-type', 'application/json');  
-        peticion.send(JSON.stringify(datosValidados));     
+        peticion.setRequestHeader('Content-type', 'application/json');
+        peticion.send(JSON.stringify(datosValidados));
     } else {
         alert("Datos no válidos");
     }
