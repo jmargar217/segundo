@@ -7,8 +7,8 @@ function cargarLista() {
     peticion.open("GET", "http://localhost:3000/posts");
     console.log("Estado de la petición tras el 'open': " + peticion.readyState);
     peticion.send();
-    peticion.addEventListener('load', () =>{
-    
+    peticion.addEventListener('load', () => {
+
         if (peticion.status == 200) {
             console.log("Datos recibidos:");
             let posts = JSON.parse(peticion.responseText); // Convertirmos los datos JSON a un objeto
@@ -20,15 +20,18 @@ function cargarLista() {
                     let ctres = document.createElement("td");
                     let ccuatro = document.createElement("td");
 
-                    let borrar = document.createElement("a");
-                    borrar.innerText = "Borrar"
-                    borrar.setAttribute("name","Borrar");
-                    borrar.setAttribute("href","");
-                    borrar.setAttribute("id",posts[i].id);
+                    let borrar = document.createElement("input");
+                    borrar.setAttribute("type", "button");
+                    borrar.setAttribute("value", "Borrar");
+                    borrar.setAttribute("name", "Borrar");
+                    borrar.setAttribute("href", "");
+                    borrar.setAttribute("id", posts[i].id);
 
-                    let ver = document.createElement("a");
-                    ver.innerText = "Ver";
-                    ver.setAttribute("href","http://localhost:3000/posts/"+posts[i].id);
+                    let ver = document.createElement("input");
+                    ver.setAttribute("value", "Ver");
+                    ver.setAttribute("type", "button");
+                    ver.setAttribute("name", "Ver")
+                    ver.setAttribute("href", "");
                     ver.setAttribute("id", posts[i].id);
 
 
@@ -52,36 +55,39 @@ function cargarLista() {
         } else {
             console.log("Error " + peticion.status + " (" + peticion.statusText + ") en la petición");
         }
-        
-        tabla.addEventListener("click",(e)=>{
-            if (e.target.name == "Borrar"){
+
+        tabla.addEventListener("click", (e) => {
+            if (e.target.name == "Borrar") {
                 let peticionDos = new XMLHttpRequest();
-                peticionDos.open("DELETE", "http://localhost:3000/posts/"+e.target.id);
+                peticionDos.open("DELETE", "http://localhost:3000/posts/" + e.target.id);
                 peticionDos.send();
 
-                peticionDos.addEventListener('load',function(){
+                peticionDos.addEventListener('load', function() {
                     location.reload();
 
                 })
-                
-            } else if(e.target.name=="Ver"){
+
+            } else if (e.target.name == "Ver") {
                 let peticionDos = new XMLHttpRequest();
-                peticionDos.open("GET", "http://localhost:3000/posts/"+e.target.id);
+                peticionDos.open("GET", "http://localhost:3000/posts/" + e.target.id);
                 peticionDos.send();
-                peticionDos.addEventListener('load',function(){
-                    let aux = JSON.parse(peticionDos.responseText);
-                    document.innerText = aux.titulo;
-
-                    //href = posible.html?postid=5"  recupera parametros  url javascript
-
+                peticionDos.addEventListener('load', function() {
+                    let post = JSON.parse(peticionDos.responseText);
+                    let titulo = post.titulo;
+                    let autor = post.autor;
+                    let contenido = post.contenido;
+                    localStorage.setItem("llaveUno", titulo);
+                    localStorage.setItem("llaveDos", autor);
+                    localStorage.setItem("llaveTres", contenido);
+                    window.location.href = "post.html";
                 })
 
 
             }
-            
+
         })
-    
-})
+
+    })
 
 
 }
