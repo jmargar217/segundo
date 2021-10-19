@@ -30,7 +30,7 @@ function cargarLista() {
                     ver.setAttribute("value", "Ver");
                     ver.setAttribute("type", "button");
                     ver.setAttribute("name", "Ver")
-                    ver.setAttribute("href", "post.html?id="+posts[i].id);
+                    ver.setAttribute("href", "post.html?id=" + posts[i].id);
                     ver.setAttribute("id", posts[i].id);
 
 
@@ -71,12 +71,7 @@ function cargarLista() {
                 peticionDos.open("GET", "http://localhost:3000/posts/" + e.target.id);
                 peticionDos.send();
                 peticionDos.addEventListener('load', function() {
-                    let post = JSON.parse(peticionDos.responseText);
-                    let titulo = post.titulo;
-                    let autor = post.autor;
-                    let contenido = post.contenido;
-                   
-                    window.location.href = "post.html?id="+e.target.id;
+                    window.location.href = "post.html?id=" + e.target.id;
                 })
 
 
