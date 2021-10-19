@@ -24,14 +24,13 @@ function cargarLista() {
                     borrar.setAttribute("type", "button");
                     borrar.setAttribute("value", "Borrar");
                     borrar.setAttribute("name", "Borrar");
-                    borrar.setAttribute("href", "");
                     borrar.setAttribute("id", posts[i].id);
 
                     let ver = document.createElement("input");
                     ver.setAttribute("value", "Ver");
                     ver.setAttribute("type", "button");
                     ver.setAttribute("name", "Ver")
-                    ver.setAttribute("href", "");
+                    ver.setAttribute("href", "post.html?id="+posts[i].id);
                     ver.setAttribute("id", posts[i].id);
 
 
@@ -76,10 +75,8 @@ function cargarLista() {
                     let titulo = post.titulo;
                     let autor = post.autor;
                     let contenido = post.contenido;
-                    localStorage.setItem("llaveUno", titulo);
-                    localStorage.setItem("llaveDos", autor);
-                    localStorage.setItem("llaveTres", contenido);
-                    window.location.href = "post.html";
+                   
+                    window.location.href = "post.html?id="+e.target.id;
                 })
 
 
