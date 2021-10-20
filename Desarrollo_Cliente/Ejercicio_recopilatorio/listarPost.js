@@ -2,7 +2,6 @@ window.onload = cargarLista;
 
 function cargarLista() {
     let tabla = document.getElementById("tabla");
-    let actualizar = document.getElementById("actualizar");
     let peticion = new XMLHttpRequest();
     console.log("Estado inicial de la petición: " + peticion.readyState);
     peticion.open("GET", "http://localhost:3000/posts");
@@ -71,17 +70,10 @@ function cargarLista() {
 
                 peticionDos.addEventListener('load', function() {
                     location.reload();
-
                 })
 
             } else if (e.target.name == "Ver") {
-                let peticionDos = new XMLHttpRequest();
-                peticionDos.open("GET", "http://localhost:3000/posts/" + e.target.id);
-                peticionDos.send();
-                peticionDos.addEventListener('load', function() {
-                    window.location.href = "post.html?id=" + e.target.id;
-                })
-
+                window.location.href = "post.html?id=" + e.target.id;
 
             }else if(e.target.name=="Modificar"){
                 window.location.href = "modificar.html?id=" + e.target.id;
