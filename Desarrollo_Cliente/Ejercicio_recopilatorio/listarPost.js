@@ -2,6 +2,7 @@ window.onload = cargarLista;
 
 function cargarLista() {
     let tabla = document.getElementById("tabla");
+    let actualizar = document.getElementById("actualizar");
     let peticion = new XMLHttpRequest();
     console.log("Estado inicial de la petición: " + peticion.readyState);
     peticion.open("GET", "http://localhost:3000/posts");
@@ -33,6 +34,11 @@ function cargarLista() {
                     ver.setAttribute("href", "post.html?id=" + posts[i].id);
                     ver.setAttribute("id", posts[i].id);
 
+                    let modificar = document.createElement("input");
+                    modificar.setAttribute("type","button");
+                    modificar.setAttribute("value","Modificar");
+                    modificar.setAttribute("name","Modificar");
+                    modificar.setAttribute("id",posts[i].id);
 
                     let id = document.createTextNode(posts[i].id);
                     let titulo = document.createTextNode(posts[i].titulo);
@@ -43,6 +49,7 @@ function cargarLista() {
                     ctres.appendChild(autor);
                     ccuatro.appendChild(borrar);
                     ccuatro.appendChild(ver);
+                    ccuatro.appendChild(modificar);
                     fila.appendChild(cuno);
                     fila.appendChild(cdos);
                     fila.appendChild(ctres);
@@ -51,6 +58,7 @@ function cargarLista() {
                 }
 
             }
+            
         } else {
             console.log("Error " + peticion.status + " (" + peticion.statusText + ") en la petición");
         }
@@ -75,6 +83,8 @@ function cargarLista() {
                 })
 
 
+            }else if(e.target.name=="Modificar"){
+                window.location.href = "modificar.html?id=" + e.target.id;
             }
 
         })

@@ -64,7 +64,7 @@ enviar.addEventListener("click", () => {
             let usuarios = JSON.parse(peticionUsuarios.responseText);
             if (usuarios.length == 0 || usuario == "") {
                 alert("El usuario introducido no esta registrado");
-            } else if (usuarios[0].nombre == usuario && usuario) {
+            } else if (usuarios[0].nombre == usuario) {
                 const comentarioAdd = {
                     autor: usuario,
                     contenido: comentario,
@@ -75,7 +75,7 @@ enviar.addEventListener("click", () => {
                 peticionFinal.setRequestHeader('Content-type', 'application/json');
                 peticionFinal.send(JSON.stringify(comentarioAdd));
                 location.reload();
-            }
+            } 
         }
 
     });
