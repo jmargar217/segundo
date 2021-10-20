@@ -19,9 +19,6 @@ let peticion = new XMLHttpRequest();
 
     });
 
-
-
-
 enviar.addEventListener('click',()=>{
     let tituloo = document.getElementById("titulo").value;
     let contenidoo = document.getElementById("contenido").value;
