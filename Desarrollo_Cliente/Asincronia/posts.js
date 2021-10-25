@@ -11,7 +11,10 @@ const enviar = document.getElementById("enviar");
 
 fetch("http://localhost:3000/posts/" + id)
     .then(post => {
-        return post.json();
+        if(post.ok){
+            return post.json();
+        }
+        
     })
     .then(postJSON => {
         document.getElementById("titulo").innerText = postJSON.titulo;
@@ -23,8 +26,9 @@ fetch("http://localhost:3000/posts/" + id)
 
 fetch("http://localhost:3000/posts/" + id + "/comments")
     .then(comentarios => {
-        return comentarios.json();
-
+        if(comentarios.ok){
+            return comentarios.json();
+        }
     })
     .then(comentariosJSON => {
         for (let i in comentariosJSON) {

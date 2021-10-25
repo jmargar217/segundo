@@ -1,6 +1,9 @@
 fetch('http://localhost:3000/posts/')
     .then(resultado => {
-        return resultado.json();
+        if(resultado.ok){
+            return resultado.json();
+        }
+        
     })
     .then(resultadoJSON => {
         cargarLista(resultadoJSON)
