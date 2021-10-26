@@ -1,3 +1,4 @@
+
 async function obtenerPost(){
     const peticion = await fetch('http://localhost:3000/posts/') 
     if(peticion.ok){
@@ -5,6 +6,10 @@ async function obtenerPost(){
         return posts;
     }
 }
+
+let posts = await obtenerPost();
+cargarLista(posts);
+
 
 function cargarLista(posts) { 
     let tabla = document.getElementById("tabla");
@@ -74,6 +79,3 @@ function cargarLista(posts) {
 
     });
 }
-
-let posts = await obtenerPost();
-cargarLista(posts);
