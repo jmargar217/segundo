@@ -1,13 +1,64 @@
 const pendingTasks = document.getElementById('pending-tasks')
 const finishedTasks = document.getElementById('finished-tasks')
 const doingTasks = document.getElementById('doing-tasks')
+const boton = document.getElementById("crear");
+
+window.onload = cargarTareas;
+
+boton.addEventListener("click", () => {
+    let status = "pendiente";
+    let texto = document.getElementById("texto").value;
+    const tarea = {
+        id: localStorage.length + 1,
+        nombre: texto,
+        estado: status
+    }
+    localStorage.setItem(tarea.id, JSON.stringify(tarea));
+    location.reload();
+
+
+})
+
+function cargarTareas() {
+    for (let i = 0; i < localStorage.length; i++) {
+        let clave = localStorage.key(i);
+        let tarea = JSON.parse(localStorage.getItem(clave));
+
+        if (tarea.estado == "pendiente") {
+            let div = document.createElement("div");
+            div.setAttribute("id", tarea.id);
+            div.classList.add('task');
+            div.setAttribute("draggable", "true")
+            let aux = document.createTextNode(tarea.nombre);
+            div.appendChild(aux);
+            pendingTasks.appendChild(div);
+
+        } else if (tarea.estado == "realizando") {
+            let div = document.createElement("div");
+            div.setAttribute("id", tarea.id);
+            div.classList.add('task');
+            div.setAttribute("draggable", "true")
+            let aux = document.createTextNode(tarea.nombre);
+            div.appendChild(aux);
+            pendingTasks.appendChild(div);
+
+        } else if (tarea.estado == "finalizada") {
+            let div = document.createElement("div");
+            div.setAttribute("id", tarea.id);
+            div.classList.add('task');
+            div.setAttribute("draggable", "true")
+            let aux = document.createTextNode(tarea.nombre);
+            div.appendChild(aux);
+            pendingTasks.appendChild(div);
+        }
+    }
+
+}
 
 //dataTransfer
 //setData: Establece la información que queremos compartir
 //getData: Establece la información que queremos obtener
-
-
-pendingTasks.addEventListener('dragover',(e)=>{
+pendingTasks.addEventListener('dragover', (e) => {
     e.preventDefault();
 
 })
@@ -72,9 +123,9 @@ doingTasks.addEventListener('drop', (e) => {
 
 
 //IMPRESCINDIBLE
-finishedTasks.addEventListener('dragstart',(e)=>{
+finishedTasks.addEventListener('dragstart', (e) => {
     e.target.classList.add('active');
-    e.dataTransfer.setData('text/plain',e.target.id)
+    e.dataTransfer.setData('text/plain', e.target.id)
 })
 
 //OBLIGATORIO, SI NO, NO FUNCIONA
@@ -82,7 +133,7 @@ finishedTasks.addEventListener('dragover', (e) => {
     e.preventDefault()
 })
 
-finishedTasks.addEventListener('drag',(e)=>{
+finishedTasks.addEventListener('drag', (e) => {
     e.target.classList.add('active');
 })
 
@@ -104,7 +155,3 @@ finishedTasks.addEventListener('drop', (e) => {
             break;
     }
 })
-
-
-
-
