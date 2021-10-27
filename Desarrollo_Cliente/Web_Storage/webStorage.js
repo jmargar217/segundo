@@ -2,7 +2,9 @@ let contador = 0;
 const tabla = document.getElementById("tabla");
 const crear = document.getElementById("crear");
 
-crear.addEventListener("click", (e) => {
+window.onload = cargarTareas;
+
+crear.addEventListener("click", () => {
     contador += 1
     let titulo = document.getElementById("texto").value;
     const tarea = {
@@ -15,9 +17,13 @@ crear.addEventListener("click", (e) => {
 });
 
 function cargarTareas() {
+    console.log(localStorage.length);
+    console.log(localStorage[1]);
+    console.log(localStorage[2]);
 
-    for (let i = 0; i < localStorage.length; i++) {
+    for (let i = 1; i <= localStorage.length; i++) {
         contador += 1;
+
         let clave = localStorage.key(i);
         let titulo = localStorage.getItem(clave);
 
@@ -62,5 +68,3 @@ tabla.addEventListener("click", (e) => {
         tabla.rows[e.target.id - 1].cells[1].classList.remove("verde");
     }
 });
-
-cargarTareas();
