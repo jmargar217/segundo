@@ -5,6 +5,17 @@ body {
     color: #fff;
     user-select: none;
   }
+
+#crear{
+  bottom: -30px;
+  right: -10%;
+  position: relative;
+}
+
+#crear input{
+  right: -7%;
+  width: 5%;
+}
   
   .container {
     margin-top: 1rem;

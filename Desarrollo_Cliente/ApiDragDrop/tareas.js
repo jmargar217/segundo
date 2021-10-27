@@ -12,7 +12,6 @@ pendingTasks.addEventListener('dragover',(e)=>{
 
 })
 
-
 pendingTasks.addEventListener('dragstart', (e) => {
     console.log(e.dataTransfer)
     e.dataTransfer.setData('text/plain', e.target.id)
@@ -60,6 +59,17 @@ doingTasks.addEventListener('dragend', (e) => {
     e.target.classList.remove('active')
 })
 
+doingTasks.addEventListener('dragover', (e) => {
+    e.preventDefault()
+})
+
+doingTasks.addEventListener('drop', (e) => {
+    e.preventDefault()
+    const element = document.getElementById(e.dataTransfer.getData('text'))
+    element.classList.remove('active')
+    doingTasks.appendChild(element);
+})
+
 
 //IMPRESCINDIBLE
 finishedTasks.addEventListener('dragstart',(e)=>{
@@ -95,15 +105,6 @@ finishedTasks.addEventListener('drop', (e) => {
     }
 })
 
-doingTasks.addEventListener('dragover', (e) => {
-    e.preventDefault()
-})
 
-doingTasks.addEventListener('drop', (e) => {
-    e.preventDefault()
-    const element = document.getElementById(e.dataTransfer.getData('text'))
-    element.classList.remove('active')
-    doingTasks.appendChild(element);
-})
 
 
