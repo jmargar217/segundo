@@ -17,17 +17,8 @@ crear.addEventListener("click", () => {
 });
 
 function cargarTareas() {
-<<<<<<< HEAD
-    console.log(localStorage.length);
-    console.log(localStorage[1]);
-    console.log(localStorage[2]);
-
-    for (let i = 1; i <= localStorage.length; i++) {
-=======
     for (let i = 0; i < localStorage.length; i++) {
->>>>>>> 126bb67d2ceb0f77edad8c0c73d6793a0cc922e7
         contador += 1;
-
         let clave = localStorage.key(i);
         let tarea = JSON.parse(localStorage.getItem(clave));
 
@@ -42,8 +33,8 @@ function cargarTareas() {
         casilla.setAttribute("type", "checkbox");
         casilla.setAttribute("id", clave);
 
-        if(tarea.estado == true){
-            casilla.setAttribute("checked","checked");
+        if (tarea.estado == true) {
+            casilla.setAttribute("checked", "checked");
             celdos.classList.add("verde");
         }
 
@@ -70,23 +61,17 @@ tabla.addEventListener("click", (e) => {
     if (e.target.name == "borrar") {
         localStorage.removeItem(e.target.id);
         location.reload();
-    } 
-    else if (e.target.checked) {
+    } else if (e.target.checked) {
         let aux = JSON.parse(localStorage.getItem(e.target.id));
         aux.estado = true;
-        localStorage.setItem(e.target.id,JSON.stringify(aux));
+        localStorage.setItem(e.target.id, JSON.stringify(aux));
+        location.reload();
+
+    } else if (!e.target.checked) {
+        let aux = JSON.parse(localStorage.getItem(e.target.id));
+        aux.estado = false;
+        localStorage.setItem(e.target.id, JSON.stringify(aux));
         location.reload();
 
     }
-    else if (!e.target.checked) {
-        let aux = JSON.parse(localStorage.getItem(e.target.id));
-        aux.estado = false;
-        localStorage.setItem(e.target.id,JSON.stringify(aux));
-        location.reload();
-        
-    }
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 126bb67d2ceb0f77edad8c0c73d6793a0cc922e7
