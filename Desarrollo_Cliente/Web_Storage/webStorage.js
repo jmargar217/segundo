@@ -2,24 +2,25 @@ let contador = 0;
 const tabla = document.getElementById("tabla");
 const crear = document.getElementById("crear");
 
-crear.addEventListener("click", (e) => {
+window.onload = cargarTareas;
+
+crear.addEventListener("click", () => {
     contador += 1
     let titulo = document.getElementById("texto").value;
     const tarea = {
         id: contador,
         nombre: titulo,
-        finalizada: false
+        estado: false
     }
     localStorage.setItem(contador, JSON.stringify(tarea));
     location.reload();
 });
 
 function cargarTareas() {
-
     for (let i = 0; i < localStorage.length; i++) {
         contador += 1;
         let clave = localStorage.key(i);
-        let titulo = localStorage.getItem(clave);
+        let tarea = JSON.parse(localStorage.getItem(clave));
 
         let fila = document.createElement("tr");
 
@@ -32,13 +33,18 @@ function cargarTareas() {
         casilla.setAttribute("type", "checkbox");
         casilla.setAttribute("id", clave);
 
+        if(tarea.estado == true){
+            casilla.setAttribute("checked","checked");
+            celdos.classList.add("verde");
+        }
+
         let borrar = document.createElement("input");
         borrar.setAttribute("type", "button");
         borrar.setAttribute("name", "borrar");
         borrar.setAttribute("value", "borrar");
         borrar.setAttribute("id", clave);
 
-        let texto = document.createTextNode(titulo);
+        let texto = document.createTextNode(tarea.nombre);
 
         celduno.append(casilla);
         celdos.appendChild(texto);
@@ -55,12 +61,19 @@ tabla.addEventListener("click", (e) => {
     if (e.target.name == "borrar") {
         localStorage.removeItem(e.target.id);
         location.reload();
-    } else if (e.target.name == "casilla" && e.target.checked) {
-        tabla.rows[e.target.id - 1].cells[1].classList.add("verde");
+    } 
+    else if (e.target.checked) {
+        let aux = JSON.parse(localStorage.getItem(e.target.id));
+        aux.estado = true;
+        localStorage.setItem(e.target.id,JSON.stringify(aux));
+        location.reload();
 
-    } else if (e.target.name == "casilla" && !e.target.checked) {
-        tabla.rows[e.target.id - 1].cells[1].classList.remove("verde");
+    }
+    else if (!e.target.checked) {
+        let aux = JSON.parse(localStorage.getItem(e.target.id));
+        aux.estado = false;
+        localStorage.setItem(e.target.id,JSON.stringify(aux));
+        location.reload();
+        
     }
 });
-
-cargarTareas();
