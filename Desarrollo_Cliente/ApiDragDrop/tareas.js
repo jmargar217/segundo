@@ -16,7 +16,6 @@ boton.addEventListener("click", () => {
     localStorage.setItem(tarea.id, JSON.stringify(tarea));
     location.reload();
 
-
 })
 
 function cargarTareas() {
@@ -40,7 +39,7 @@ function cargarTareas() {
             div.setAttribute("draggable", "true")
             let aux = document.createTextNode(tarea.nombre);
             div.appendChild(aux);
-            pendingTasks.appendChild(div);
+            doingTasks.appendChild(div);
 
         } else if (tarea.estado == "finalizada") {
             let div = document.createElement("div");
@@ -49,7 +48,7 @@ function cargarTareas() {
             div.setAttribute("draggable", "true")
             let aux = document.createTextNode(tarea.nombre);
             div.appendChild(aux);
-            pendingTasks.appendChild(div);
+            finishedTasks.appendChild(div);
         }
     }
 
@@ -64,9 +63,7 @@ pendingTasks.addEventListener('dragover', (e) => {
 })
 
 pendingTasks.addEventListener('dragstart', (e) => {
-    console.log(e.dataTransfer)
     e.dataTransfer.setData('text/plain', e.target.id)
-    console.log(e.dataTransfer.getData)
 })
 
 pendingTasks.addEventListener('drag', (e) => {
@@ -84,22 +81,30 @@ pendingTasks.addEventListener('drop', (e) => {
     element.classList.remove('active')
     const padre = element.parentNode.id
 
+    let id = e.dataTransfer.getData("text");
+    let tarea = JSON.parse(localStorage.getItem(id));
+
+    if (tarea.estado == "realizando") {
+        tarea.estado = "pendiente";
+        localStorage.setItem(id, JSON.stringify(tarea));
+    } else if (tarea.estado == "finalizada") {
+        tarea.estado = "pendiente";
+        localStorage.setItem(id, JSON.stringify(tarea));
+    }
+
     switch (padre) {
         case 'pending-tasks':
-            console.log('pendingTasks');
             pendingTasks.appendChild(pendingTasks.removeChild(element));
             break;
         case 'doing-tasks':
-            console.log('doingTasks');
             pendingTasks.appendChild(doingTasks.removeChild(element));
             break;
     }
 })
 
 doingTasks.addEventListener('dragstart', (e) => {
-    console.log(e.dataTransfer)
     e.dataTransfer.setData('text/plain', e.target.id)
-    console.log(e.dataTransfer.getData)
+    console.log(e.dataTransfer.getData("text"))
 })
 
 doingTasks.addEventListener('drag', (e) => {
@@ -117,6 +122,18 @@ doingTasks.addEventListener('dragover', (e) => {
 doingTasks.addEventListener('drop', (e) => {
     e.preventDefault()
     const element = document.getElementById(e.dataTransfer.getData('text'))
+
+    let id = e.dataTransfer.getData("text");
+    let tarea = JSON.parse(localStorage.getItem(id));
+
+    if (tarea.estado == "pendiente") {
+        tarea.estado = "realizando";
+        localStorage.setItem(id, JSON.stringify(tarea));
+    } else if (tarea.estado == "finalizada") {
+        tarea.estado = "realizando";
+        localStorage.setItem(id, JSON.stringify(tarea));
+    }
+
     element.classList.remove('active')
     doingTasks.appendChild(element);
 })
@@ -143,6 +160,17 @@ finishedTasks.addEventListener('drop', (e) => {
     const element = document.getElementById(e.dataTransfer.getData('text'))
     element.classList.remove('active')
     const padre = element.parentNode.id
+
+    let id = e.dataTransfer.getData("text");
+    let tarea = JSON.parse(localStorage.getItem(id));
+
+    if (tarea.estado == "pendiente") {
+        tarea.estado = "finalizada";
+        localStorage.setItem(id, JSON.stringify(tarea));
+    } else if (tarea.estado == "realizando") {
+        tarea.estado = "finalizada";
+        localStorage.setItem(id, JSON.stringify(tarea));
+    }
 
     switch (padre) {
         case 'pending-tasks':
