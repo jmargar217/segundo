@@ -58,20 +58,20 @@ function cargarTareas() {
 //setData: Establece la información que queremos compartir
 //getData: Establece la información que queremos obtener
 pendingTasks.addEventListener('dragover', (e) => {
-    e.preventDefault();
-
+    e.preventDefault()
 })
-
-pendingTasks.addEventListener('dragstart', (e) => {
-    e.dataTransfer.setData('text/plain', e.target.id)
-})
-
 pendingTasks.addEventListener('drag', (e) => {
     e.target.classList.add('active')
 })
-
 pendingTasks.addEventListener('dragend', (e) => {
     e.target.classList.remove('active')
+})
+pendingTasks.addEventListener('dragstart', (e) => {
+    console.log(e.dataTransfer)
+    e.target.classList.add('active')
+
+    e.dataTransfer.setData('text/plain', e.target.id)
+    console.log(e.dataTransfer.getData)
 })
 
 
@@ -82,15 +82,11 @@ pendingTasks.addEventListener('drop', (e) => {
     const padre = element.parentNode.id
 
     let id = e.dataTransfer.getData("text");
-    let tarea = JSON.parse(localStorage.getItem(id));
+    let tarea = JSON.parse(localStorage.getItem(id));   
 
-    if (tarea.estado == "realizando") {
-        tarea.estado = "pendiente";
-        localStorage.setItem(id, JSON.stringify(tarea));
-    } else if (tarea.estado == "finalizada") {
-        tarea.estado = "pendiente";
-        localStorage.setItem(id, JSON.stringify(tarea));
-    }
+    
+    tarea.estado = "pendiente";
+    localStorage.setItem(id, JSON.stringify(tarea));
 
     switch (padre) {
         case 'pending-tasks':
@@ -100,11 +96,14 @@ pendingTasks.addEventListener('drop', (e) => {
             pendingTasks.appendChild(doingTasks.removeChild(element));
             break;
     }
+
+    pendingTasks.appendChild(element);
 })
 
 doingTasks.addEventListener('dragstart', (e) => {
+    console.log(e.dataTransfer)
     e.dataTransfer.setData('text/plain', e.target.id)
-    console.log(e.dataTransfer.getData("text"))
+    console.log(e.dataTransfer.getData)
 })
 
 doingTasks.addEventListener('drag', (e) => {
@@ -119,6 +118,7 @@ doingTasks.addEventListener('dragover', (e) => {
     e.preventDefault()
 })
 
+
 doingTasks.addEventListener('drop', (e) => {
     e.preventDefault()
     const element = document.getElementById(e.dataTransfer.getData('text'))
@@ -126,13 +126,9 @@ doingTasks.addEventListener('drop', (e) => {
     let id = e.dataTransfer.getData("text");
     let tarea = JSON.parse(localStorage.getItem(id));
 
-    if (tarea.estado == "pendiente") {
-        tarea.estado = "realizando";
-        localStorage.setItem(id, JSON.stringify(tarea));
-    } else if (tarea.estado == "finalizada") {
-        tarea.estado = "realizando";
-        localStorage.setItem(id, JSON.stringify(tarea));
-    }
+   
+    tarea.estado = "realizando";
+    localStorage.setItem(id, JSON.stringify(tarea));
 
     element.classList.remove('active')
     doingTasks.appendChild(element);
@@ -140,18 +136,21 @@ doingTasks.addEventListener('drop', (e) => {
 
 
 //IMPRESCINDIBLE
-finishedTasks.addEventListener('dragstart', (e) => {
-    e.target.classList.add('active');
-    e.dataTransfer.setData('text/plain', e.target.id)
-})
-
-//OBLIGATORIO, SI NO, NO FUNCIONA
 finishedTasks.addEventListener('dragover', (e) => {
     e.preventDefault()
 })
-
 finishedTasks.addEventListener('drag', (e) => {
-    e.target.classList.add('active');
+    e.target.classList.add('active')
+})
+finishedTasks.addEventListener('dragend', (e) => {
+    e.target.classList.remove('active')
+})
+finishedTasks.addEventListener('dragstart', (e) => {
+    console.log(e.dataTransfer)
+    e.target.classList.add('active')
+
+    e.dataTransfer.setData('text/plain', e.target.id)
+    console.log(e.dataTransfer.getData)
 })
 
 
@@ -164,13 +163,9 @@ finishedTasks.addEventListener('drop', (e) => {
     let id = e.dataTransfer.getData("text");
     let tarea = JSON.parse(localStorage.getItem(id));
 
-    if (tarea.estado == "pendiente") {
-        tarea.estado = "finalizada";
-        localStorage.setItem(id, JSON.stringify(tarea));
-    } else if (tarea.estado == "realizando") {
-        tarea.estado = "finalizada";
-        localStorage.setItem(id, JSON.stringify(tarea));
-    }
+    tarea.estado = "finalizada";
+    localStorage.setItem(id, JSON.stringify(tarea));
+    
 
     switch (padre) {
         case 'pending-tasks':
