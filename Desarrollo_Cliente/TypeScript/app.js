@@ -5,7 +5,6 @@ var PERSONAJE = {
     nombre: nombre,
     edad: edad
 };
-// Cree una interfaz que sirva para validar el siguiente objeto
 var batman = {
     nombre: "Bruno Díaz",
     artesMarciales: ["Karate", "Aikido", "Wing Chun", "Jiu-Jitsu"]
@@ -14,11 +13,13 @@ var batman = {
 function resultadoDoble(a, b) {
     return (a + b) * 2;
 }
+var Doble = function (a, b) { return (a + b) * 2; };
 // Función con parametros obligatorios, opcionales y por defecto
 // donde NOMBRE = obligatorio
 //       PODER  = opcional
 //       ARMA   = por defecto = "arco"
 function getAvenger(nombre, poder, arma) {
+    if (arma === void 0) { arma = "arco"; }
     var mensaje;
     if (poder) {
         mensaje = nombre + " tiene el poder de: " + poder + " y un arma: " + arma;
@@ -35,3 +36,14 @@ function getAvenger(nombre, poder, arma) {
 //   * altura
 // También un método que calcule el área  =  base * altura,
 // ese método debe de retornar un numero.
+var Rectangulo = /** @class */ (function () {
+    function Rectangulo(baseNueva, alturaNueva) {
+        this.base = baseNueva;
+        this.altura = alturaNueva;
+    }
+    Rectangulo.prototype.calcularArea = function () {
+        return this.base * this.altura;
+    };
+    ;
+    return Rectangulo;
+}());
