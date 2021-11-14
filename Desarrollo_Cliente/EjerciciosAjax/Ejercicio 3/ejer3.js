@@ -10,9 +10,13 @@ El nombre de usuario está ocupado:
 
 const boton = document.getElementById("comprobar");
 boton.addEventListener("click", () => {
-    let nombre = document.getElementById("login").value;
+    let datosFormulario = new FormData(document.getElementById("formulario"));
+    const opcion = {
+        method: "POST",
+        body: datosFormulario
+    }
 
-    fetch('https://intranetjacaranda.es/Ejercicios/Ejercicio3/servidor/compruebaDisponibilidadJSON.php?parametro=' + nombre)
+    fetch('https:compruebaDisponibilidadJSON', opcion)
         .then(response => {
             if (response.ok) {
                 return response.json();

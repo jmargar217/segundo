@@ -9,9 +9,13 @@ la comprobación
 
 const boton = document.getElementById("comprobar");
 boton.addEventListener("click", (e) => {
-    let nombre = document.getElementById("login").value;
+    let datos = new FormData(document.getElementById("formulario"));
+    const opcion = {
+        method: "POST",
+        body: datos
+    }
 
-    fetch('http://joaquin.loc/compruebaDisponibilidad.php?parametro1=' + nombre)
+    fetch('http://joaquin.loc/compruebaDisponibilidad.php', opcion)
         .then(response => {
             if (response.ok) {
                 return response.text();

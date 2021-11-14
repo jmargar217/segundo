@@ -6,9 +6,13 @@ alternativos devueltos por el servidor.
 
 const boton = document.getElementById("comprobar");
 boton.addEventListener("click", () => {
-    let nombre = document.getElementById("login").value;
+    let datosFormulario = new FormData(document.getElementById("formulario"));
+    const opcion = {
+        method: "POST",
+        body: datosFormulario
+    }
 
-    fetch('http://joaquin.loc/compruebaDisponibilidadXML.php?parametro1=' + nombre)
+    fetch('http://joaquin.loc/compruebaDisponibilidadXML.php', opcion)
         .then(response => {
             if (response.ok) {
                 return response.text();
@@ -19,7 +23,7 @@ boton.addEventListener("click", () => {
             const xml = parser.parseFromString(datos, "application/xml");
 
             let respuestas = xml.getElementsByTagName("respuesta")[0];
-            let disponible = respuestas.getElementByTagName("disponible")[0].firstChild.nodeValue;
+            let disponible = respuestas.getElementsByTagName("disponible")[0].firstChild.nodeValue;
 
             if (disponible == "si") {
                 document.getElementById("disponibilidad").innerText = "El usuario si está disponible";
