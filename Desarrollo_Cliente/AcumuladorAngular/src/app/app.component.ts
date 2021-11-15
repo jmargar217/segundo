@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RelojComponent } from './reloj/reloj.component';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  titulo: string = 'Acumulador Angular';
-  contador: number = 0;
+  public titulo: string;
+  public contador: number ;
+  public fecha: RelojComponent = new RelojComponent;
+
+  constructor(){
+    this.titulo="Acumulador Angular";
+    this.contador=0;
+  }
 
   incremento(incremento:number){
     this.contador +=incremento;

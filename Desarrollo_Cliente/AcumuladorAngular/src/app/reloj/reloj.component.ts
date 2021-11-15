@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RelojComponent implements OnInit {
   fecha: Date;
+  nombreMes:string[] = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
   constructor() {
     this.fecha = new Date();
@@ -19,6 +21,10 @@ export class RelojComponent implements OnInit {
 
   mostrarFecha():number{
     return this.fecha.getDate();
+  }
+
+  mostrarNombreMes():string{
+    return this.nombreMes[this.fecha.getMonth()]
   }
 
 }
