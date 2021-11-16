@@ -11,9 +11,14 @@ export class AppComponent {
   public contador: number ;
   public fecha: RelojComponent = new RelojComponent;
 
+  get tituloMayus():string{
+    return this.titulo.toUpperCase();
+  }
+
   constructor(){
     this.titulo="Acumulador Angular";
     this.contador=0;
+
   }
 
   incremento(incremento:number){
