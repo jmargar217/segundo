@@ -6,15 +6,13 @@ let i=index; let primero=first; let ultimo=last;"
 </li>
 
 <h1>Listado Aprobados</h1>
-<ul>
-  <li *ngfor="let alumno of aprobados;">
-    {{alumno}}
-  </li>
-</ul>
+<li *ngfor="let aprobado of aprobados;">
+  {{aprobado}}
+</li>
+
 
 <br>
 <button *ngIf="listado.length!=0; else vacio" (click)="borrarAlumno()">Eliminar</button>
-<h2>{{aprobado}}</h2>
 
 
 <ng-template #vacio>
