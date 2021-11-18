@@ -9,23 +9,36 @@ interface Personaje{
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnInit {
-  
-  nuevo: Personaje={
-    nombre: "Bull",
-    salud: 5200
-  }
-  constructor() { }
+
+  public personajes:Personaje[];
+  public nombre:string="";
+  public salud:number=0;
+
+  constructor() {
+
+    this.personajes = [
+    { nombre: "Shelly",
+      salud: 3600
+    },
+    {
+      nombre: "Nita",
+      salud: 3800
+    },
+    {
+      nombre: "Colt",
+      salud: 2800
+    }
+    ];
+
+    console.log(this.personajes);
+   }
 
   ngOnInit(): void {
   }
 
   agregar(){
-    
-    console.log(this.nuevo.nombre);
-  }
-  cambiarNombre(event:any){
-    this.nuevo.nombre=event.target.value;
-    console.log(this.nuevo.nombre);
-  }
+    this.personajes.push({nombre: this.nombre,salud:this.salud});
+    console.log(this.personajes);
 
+  }
 }
