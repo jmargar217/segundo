@@ -1,4 +1,6 @@
 export interface Entrada {
-  titulo:string;
-  resumen:string;
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
 }

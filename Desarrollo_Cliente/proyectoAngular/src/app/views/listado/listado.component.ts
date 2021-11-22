@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Entrada } from 'src/app/shared/interfaces/entrada';
+import { EntradaService } from 'src/app/shared/services/entrada.service';
 
 
 
@@ -12,26 +13,27 @@ export class ListadoComponent implements OnInit {
   // Atibutos
   public listadoEntradas: Entrada[];
 
-  constructor() {
-    this.listadoEntradas = [
-      {
-        titulo: 'Entrada 1',
-        resumen: 'Ejemplo de entrada'
-      },
-      {
-        titulo: 'Entrada 2',
-        resumen: 'Ejemplo de entrada'
-      },
-      {
-        titulo: 'Entrada 3',
-        resumen: 'Ejemplo de entrada'
-      }
-    ];
+  constructor(private entradaService:EntradaService) {
+    this.listadoEntradas = [];
   }
 
   ngOnInit(): void {
+    this.recuperarEntradas();
   }
 
+  private recuperarEntradas():void{
+    this.entradaService.recuperarEntradas().subscribe(
+      (data) => {
+        this.listadoEntradas = data;
+      },
+      (error: Error) => {
+        console.log('Error: ', error);
+      },
+      () => {
+        console.log('Petición realizada correctamente');
+      }
+    );
+  }
   public mostrarTitulo(titulo: string): void {
     alert(`Entrada seleccionada: ${ titulo }.`);
   }
