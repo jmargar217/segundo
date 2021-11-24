@@ -1,0 +1,10 @@
+<h2>Borrar Post</h2>
+<hr>
+<form (ngSubmit)="borrarPost()">
+    <label for="titulo"></label>
+    <input type="text" name="titulo" placeholder="titulo" [(ngModel)]="postBorrar.titulo">
+    <label for="autor"></label>
+    <input type="text" name="autor" placeholder="autor" [(ngModel)]="postBorrar.autor">
+    <label for=""></label>
+    <button type="submit">Borrar</button>
+</form>

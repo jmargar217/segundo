@@ -1,0 +1,44 @@
+form {
+    margin: 0 auto;
+    /* Centramos el formulario */
+    width: 300px;
+    /* Sin ancho no podemos centrar el formulario */
+    background-color: white;
+    /* Color blanco para el formulario */
+    padding: 2px;
+    /* separamos los bordes del form del resto de elementos */
+    border-radius: 10px;
+    /* Redondeamos los bordes del form */
+}
+
+h2 {
+    color: #3808a8;
+    font-weight: normal;
+    font-size: 25px;
+    font-family: Arial;
+}
+
+input,
+textarea {
+    padding: 5px;
+    /* Separamos la letra del interior (contenido) en los inputs de los bordes */
+}
+
+label {
+    display: block;
+    /* Ahora los inputs quedan debajo de los label */
+    padding: 5px;
+    /* Separando espacios internos */
+}
+
+.btn {
+    margin-top: 20px;
+    /* Damos un margen individual para el contenedor del botón */
+}
+
+button {
+    width: 40%;
+    margin-left: 15%;
+    background-color: rgb(96, 160, 219);
+    border-radius: 10px;
+}

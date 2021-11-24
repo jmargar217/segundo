@@ -1,0 +1,15 @@
+<h1>Listado de Posts:</h1>
+
+<div id="listado">
+    <br>
+    <ul>
+        <li *ngFor="let posts of posts">
+            <div id="separador"></div>
+            <h4><b>Titulo: {{posts.titulo}}</b> </h4>
+            <h4><b>Autor: {{posts.autor}}</b> </h4>
+            <p>
+                <b>Contenido:<br>{{posts.contenido}}</b>
+            </p>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,33 @@
+#listado {
+    background-color: rgb(184, 210, 245);
+    height: 750px;
+}
+
+li {
+    list-style-type: circle;
+}
+
+#separador {
+    border: 1px solid rgb(47, 0, 255);
+}
+
+h1 {
+    text-align: center;
+    color: #3808a8;
+    font-weight: normal;
+    font-size: 25px;
+    font-family: Arial;
+}
+
+h4 {
+    color: #2b5bc4;
+    font-weight: normal;
+    font-size: 15px;
+    font-family: Arial;
+}
+
+p {
+    color: #2b5bc4;
+    font-size: 13px;
+    font-family: Arial;
+}

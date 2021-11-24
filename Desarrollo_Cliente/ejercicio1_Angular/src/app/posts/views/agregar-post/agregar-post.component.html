@@ -1,0 +1,12 @@
+<h2>Añadir Post:</h2>
+<hr>
+<form (ngSubmit)="agregarPost()">
+    <label for="titulo"></label>
+    <input type="text" name="titulo" placeholder="titulo" [(ngModel)]="nuevoPost.titulo">
+    <label for="autor"></label>
+    <input type="text" name="titulo" placeholder="autor" [(ngModel)]="nuevoPost.autor">
+    <label for="contenido"></label>
+    <textarea name="contenido" cols="21" rows="10" placeholder="contenido" [(ngModel)]="nuevoPost.contenido"></textarea>
+    <label for=""></label>
+    <button type="submit">Añadir</button>
+</form>
