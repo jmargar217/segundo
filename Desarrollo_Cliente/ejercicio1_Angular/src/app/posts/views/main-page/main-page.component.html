@@ -1,9 +1,15 @@
 <div class="row">
     <div class="col">
-        <app-listado-entradas></app-listado-entradas>
+        <app-listado-entradas *ngIf="!isPosts"></app-listado-entradas>
     </div>
     <div class="col">
-        <app-agregar-post></app-agregar-post><br>
-        <app-borrar-post></app-borrar-post>
+        <app-agregar-post *ngIf="!isAdd"></app-agregar-post><br>
+        <app-borrar-post *ngIf="!isDel"></app-borrar-post>
     </div>
 </div>
+<div class="row">
+    <div class="col">
+        <button (click)="ocultarPosts()">Ocultar Posts</button>
+        <button (click)="ocultarAgregar()">Ocultar Añadir</button>
+        <button (click)="ocultarBorrar()">Ocultar Borrar</button>
+    </div>

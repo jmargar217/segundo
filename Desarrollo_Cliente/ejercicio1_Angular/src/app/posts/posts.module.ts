@@ -5,8 +5,8 @@ import { ListadoPostsService } from './shared/services/listado-posts.service';
 import { AgregarPostComponent } from './views/agregar-post/agregar-post.component';
 import { FormsModule } from '@angular/forms';
 import { MainPageComponent } from './views/main-page/main-page.component';
-import { ConsultarPostsService } from './shared/services/consultar-posts.service';
 import { BorrarPostComponent } from './views/borrar-post/borrar-post.component';
+import { ContadorFechaService } from './shared/services/contador-fecha.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { BorrarPostComponent } from './views/borrar-post/borrar-post.component';
   ],
   providers: [
     ListadoPostsService,
-    ConsultarPostsService
+    ContadorFechaService
   ]
 })
 export class PostsModule { }

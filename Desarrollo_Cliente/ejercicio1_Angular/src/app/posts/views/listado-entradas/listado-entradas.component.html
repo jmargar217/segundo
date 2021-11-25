@@ -1,7 +1,10 @@
 <h1>Listado de Posts:</h1>
 
 <div id="listado">
-    <br>
+    <div class="row">
+        <p class="col">Fecha: {{fecha}}</p>
+        <p class="col">Contador de posts: {{contador}}</p>
+    </div>
     <ul>
         <li *ngFor="let posts of posts">
             <div id="separador"></div>
@@ -12,4 +15,4 @@
             </p>
         </li>
     </ul>
-</div>
+</div><br>

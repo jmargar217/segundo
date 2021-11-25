@@ -47,7 +47,7 @@ import { Entrada } from '../interfaces/entrada';
   }
 
   constructor() {
-    console.log("El servicio se ha iniciado");
+    console.log("El servicio listado se ha iniciado");
    }
 
 

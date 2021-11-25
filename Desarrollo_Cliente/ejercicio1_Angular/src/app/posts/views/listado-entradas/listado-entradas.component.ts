@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Entrada } from '../../shared/interfaces/entrada';
+import { ContadorFechaService } from '../../shared/services/contador-fecha.service';
 import { ListadoPostsService } from '../../shared/services/listado-posts.service';
 
 @Component({
@@ -13,9 +14,26 @@ export class ListadoEntradasComponent implements OnInit {
     return this.serviceListar.posts;
   }
 
-  constructor(private serviceListar:ListadoPostsService) {}
+  get fecha():String{
+    return this.contadorFecha.fecha;
+  }
+
+  get contador():number{
+    return this.contadorFecha.obtenerContadorPost(this.posts);
+  }
+
+  constructor(private serviceListar:ListadoPostsService, private contadorFecha:ContadorFechaService) {}
 
   ngOnInit(): void {
   }
+
+
+  ocultar():void{
+
+  }
+  mostrar():void{
+
+  }
+
 
 }
